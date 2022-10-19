@@ -11,13 +11,13 @@
 import UIKit
 
 
-protocol Coordinator {
-    var childCoordinator: [Coordinator] {get}
+protocol Coordinator: AnyObject {
+    var childCoordinators: [Coordinator] {get}
     func start()
 }
 
 final class AppCoordinator: Coordinator {
-   private(set) var childCoordinator: [Coordinator] = []
+   private(set) var childCoordinators: [Coordinator] = []
     private let window: UIWindow
     
     init(window: UIWindow) {
@@ -28,7 +28,7 @@ final class AppCoordinator: Coordinator {
         let navigationController = UINavigationController()
         
         let eventListCoordinator = EventListCoordinator(navigationController: navigationController)
-        childCoordinator.append(eventListCoordinator)
+        childCoordinators.append(eventListCoordinator)
         
         eventListCoordinator.start()
         

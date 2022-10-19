@@ -10,7 +10,7 @@ import CoreData
 
 class EventListVC: UIViewController {
     
-    
+    var viewModel: EventListviewModel!
     
     static func instantiate()-> EventListVC {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
@@ -29,13 +29,14 @@ class EventListVC: UIViewController {
         let barButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(addButtonClick))
         barButtonItem.tintColor = .primary
         navigationItem.rightBarButtonItem = barButtonItem
-        navigationItem.title = "Events"
+        navigationItem.title = viewModel.title
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
 
 extension EventListVC {
     @objc private func addButtonClick() {
-        print("tapped bar button")
+        viewModel.tappedAddEvent()
+        
     }
 }
